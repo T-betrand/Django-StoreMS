@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load crispy_forms_tags %}
 
 <!doctype html>
 <html lang="en">
@@ -43,6 +44,13 @@
 <main role="main" class="container">
     <div class="jumbotron">
         <div class="header">{{header}}</div>
+
+        <form method="POST" action="">{%  csrf_token %}
+        {{form|crispy}}
+            <input type="submit" value="Search" />
+        </form>
+        <br>
+
         <div class="display-table">
             <table class="table">
                 <thead>
