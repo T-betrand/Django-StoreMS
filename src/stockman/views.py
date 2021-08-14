@@ -6,6 +6,7 @@ from .forms import StockCreateForm, StockSearchForm, StockUpdateForm
 
 import csv
 
+
 # Create your views here.
 def home(request):
     title = "Welcome to the home page"
@@ -29,8 +30,18 @@ def list_items(request):
     }
 
     if request.method == 'POST':
-        queryset = Stock.objects.filter(category__icontains=form['category'].value(),
+        queryset = Stock.objects.filter(#category__icontains=form['category'].value(),
                                         item_name__icontains=form['item_name'].value())
+        if form['export_to_CSV'].value():
+            response = HttpResponse(content_type='text/csv')
+            response['content-Disposition'] = 'attachment; filename="List of stock.csv"'
+            writer = csv.writer(response)
+            writer.writerow(['CATEGORY', 'ITEM NAME', 'QUANTITY'])
+            instance = queryset
+            for stock in instance:
+                writer.writerow([stock.category, stock.item_name, stock.quantity])
+            return response
+
         context = {
             "form": form,
             "header": header,
