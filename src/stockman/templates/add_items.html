@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load crispy_forms_tags %}
 
 <!doctype html>
 <html lang="en">
@@ -66,7 +67,7 @@
   <div class="jumbotron">
     <h1>{{title}}</h1>
 <form method='POST' action='' >{% csrf_token %}
-    {{form}}
+    {{form|crispy}}
     <input type="submit" value="Save" />
 </form>
 <!--      <a class="btn btn-lg btn-primary" href="/docs/4.4/components/navbar/" role="button">View navbar docs &raquo;</a>-->
