@@ -1,5 +1,4 @@
 {% load staticfiles %}
-{% load crispy_forms_tags %}
 
 <!doctype html>
 <html lang="en">
@@ -9,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.6">
-    <title>list-items</title>
+    <title>Home</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/navbar-fixed/">
 
@@ -39,42 +38,22 @@
     <link rel="stylesheet" href="{% static 'css/navbar-top-fixed.css' %}">
 </head>
 <body>
+
 {% include 'navbar.html' %}
 
 <main role="main" class="container">
     <div class="jumbotron">
-        <div class="header">{{header}}</div>
+        <form method="post" action="">
+            {% csrf_token %}
+            <h1>Are you sure you want to delete this item</h1><br>
+            <input class="btn btn-danger" type="submit" value="yes"/>
 
-        <form method="POST" action="">{%  csrf_token %}
-        {{form|crispy}}
-            <input type="submit" value="Search" />
+            <a href="/list_items">
+                <div class="btn btn-primary">
+                    Cancel
+                </div>
+            </a>
         </form>
-        <br>
-
-        <div class="display-table">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>COUNT</th>
-                    <th>CATEGORY</th>
-                    <th>ITEM NAME</th>
-                    <th>QUANTITY IN STORE</th>
-                    <th>DELETE</th>
-                </tr>
-                </thead>
-                {% for instance in queryset %}
-                <tr>
-                    <td>{{ forloop.counter }}</td>
-                    <td>{{ instance.category }}</td>
-                    <td><a href="{% url 'update-items' instance.id %}">{{ instance.item_name }}</a></td>
-                    <td>{{ instance.quantity }}</td>
-                    <td><a href="{% url 'delete-items' instance.id %}"><img height="25" src="{% static '/img/delete-icon-png-19.jpg' %}" alt="Delete"></a></td>
-                </tr>
-                {% endfor %}
-            </table>
-
-        </div>
-        <!--      <a class="btn btn-lg btn-primary" href="/docs/4.4/components/navbar/" role="button">View navbar docs &raquo;</a>-->
 
 
     </div>
