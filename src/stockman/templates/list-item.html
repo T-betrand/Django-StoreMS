@@ -34,6 +34,7 @@
         }
       }
 
+
     </style>
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="{% static 'css/navbar-top-fixed.css' %}">
@@ -42,12 +43,23 @@
 {% include 'navbar.html' %}
 
 <main role="main" class="container">
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            {% if message.tags %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+             {% endif %}
+        {% endfor %}
+    </ul>
+    {% endif %}
+
     <div class="jumbotron">
         <div class="header">{{header}}</div>
 
-        <form method="POST" action="">{%  csrf_token %}
-        {{form|crispy}}
-            <input type="submit" value="Search" />
+        <form method="POST" action="">{% csrf_token %}
+            {{form|crispy}}
+            <input type="submit" value="Search"/>
         </form>
         <br>
 
@@ -68,7 +80,9 @@
                     <td>{{ instance.category }}</td>
                     <td><a href="{% url 'update-items' instance.id %}">{{ instance.item_name }}</a></td>
                     <td>{{ instance.quantity }}</td>
-                    <td><a href="{% url 'delete-items' instance.id %}"><img height="25" src="{% static '/img/delete-icon-png-19.jpg' %}" alt="Delete"></a></td>
+                    <td><a href="{% url 'delete-items' instance.id %}"><img height="25"
+                                                                            src="{% static '/img/delete-icon-png-19.jpg' %}"
+                                                                            alt="Delete"></a></td>
                 </tr>
                 {% endfor %}
             </table>
@@ -83,6 +97,7 @@
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="/docs/4.4/assets/js/vendor/jquery.slim.min.js"><\/script>')
+
 </script>
 <script src="/docs/4.4/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm"
