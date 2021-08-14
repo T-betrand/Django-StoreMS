@@ -1,6 +1,19 @@
 from django import forms
 
-from .models import Stock
+from .models import Stock, Category
+
+
+class CategoryCreateForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ['name']
+
+    def clean_category_name(self):
+        categories = self.cleaned_data.get('name')
+        for instance in categories:
+            if instance.name == name:
+                raise forms.ValidationError(str(category) + " is already created")
+            return name
 
 
 class StockCreateForm(forms.ModelForm):
@@ -12,9 +25,6 @@ class StockCreateForm(forms.ModelForm):
         category = self.cleaned_data.get('category')
         if not category:
             raise forms.ValidationError('This Field is required')
-        # for instance in Stock.objects.all():
-        #     if instance.category == category:
-        #         raise forms.ValidationError(category + " is already created")
         return category
 
     def clean_item_name(self):
@@ -25,6 +35,7 @@ class StockCreateForm(forms.ModelForm):
 
 
 class StockSearchForm(forms.ModelForm):
+    export_to_CSV = forms.BooleanField(required=False)
     class Meta:
         model = Stock
         fields = ['category', 'item_name']
