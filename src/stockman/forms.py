@@ -20,7 +20,7 @@ class CategoryCreateForm(forms.ModelForm):
 class StockCreateForm(forms.ModelForm):
     class Meta:
         model = Stock
-        fields = ['category', 'item_name', 'quantity']
+        fields = ['category', 'item_name', 'quantity', 'date']
 
     def clean_category(self):
         category = self.cleaned_data.get('category')

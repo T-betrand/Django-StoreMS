@@ -36,6 +36,7 @@
 
 
 
+
     </style>
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="{% static 'css/navbar-top-fixed.css' %}">
@@ -49,10 +50,10 @@
     <ul class="messages">
         {% for message in messages %}
 
-        <li
-        {% if message.tags %} class="{{ message.tags }}" {% endif %}>
-        {{ message }}
-        </li>
+            <li
+                    {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                {{ message }}
+            </li>
 
         {% endfor %}
     </ul>
@@ -72,18 +73,24 @@
                 <thead>
                 <tr>
                     <th>COUNT</th>
+                    <th>ID</th>
                     <th>CATEGORY</th>
                     <th>ITEM NAME</th>
                     <th>QUANTITY IN STORE</th>
+                    <th>TIME STAMP</th>
+                    <th>LAST UPDATED</th>
                     <th>DELETE</th>
                 </tr>
                 </thead>
                 {% for instance in queryset %}
                 <tr>
                     <td>{{ forloop.counter }}</td>
+                    <td>{{ instance.id }}</td>
                     <td>{{ instance.category }}</td>
                     <td><a href="{% url 'update-items' instance.id %}">{{ instance.item_name }}</a></td>
                     <td>{{ instance.quantity }}</td>
+                    <td>{{ instance.timestamp }}</td>
+                    <td>{{ instance.last_updated }}</td>
                     <td><a href="{% url 'delete-items' instance.id %}"><img height="25"
                                                                             src="{% static '/img/delete-icon-png-19.jpg' %}"
                                                                             alt="Delete"></a></td>
@@ -103,9 +110,13 @@
 <script>window.jQuery || document.write('<script src="/docs/4.4/assets/js/vendor/jquery.slim.min.js"><\/script>')
 
 
+
 </script>
 <script src="/docs/4.4/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm"
         crossorigin="anonymous"></script>
+
+
+<script src="{% static 'js/msg.js' %}"></script>
 </body>
 </html>
