@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 from .models import *
 from .forms import *
@@ -14,11 +15,12 @@ def home(request):
     form = "Welcome to the home page"
     context = {
         "title": title,
-        "test": form
+        "test": form,
     }
     return render(request, "home.html", context)
 
 
+@login_required
 def list_items(request):
     header = "List of items"
     queryset = Stock.objects.all()
@@ -52,6 +54,7 @@ def list_items(request):
     return render(request, "list-item.html", context)
 
 
+@login_required
 def add_items(request):
     form = StockCreateForm(request.POST or None)
     if form.is_valid():
@@ -65,6 +68,7 @@ def add_items(request):
     return render(request, "add_items.html", context)
 
 
+@login_required
 def update_items(request, pk):
     queryset = Stock.objects.get(id=pk)
     form = StockUpdateForm(instance=queryset)
@@ -81,6 +85,7 @@ def update_items(request, pk):
     return render(request, 'add_items.html', context)
 
 
+@login_required
 def delete_items(request, pk):
     queryset = Stock.objects.get(id=pk)
     if request.method == 'POST':
@@ -90,6 +95,7 @@ def delete_items(request, pk):
     return render(request, 'delete_items.html')
 
 
+@login_required
 def stock_detail(request, pk):
     queryset = Stock.objects.get(id=pk)
     context = {
@@ -99,6 +105,7 @@ def stock_detail(request, pk):
     return render(request, "stock_detail.html", context)
 
 
+@login_required
 def issue_items(request, pk):
     queryset = Stock.objects.get(id=pk)
     form = IssueItemForm(request.POST or None, instance=queryset)
@@ -120,6 +127,7 @@ def issue_items(request, pk):
     return render(request, "add_items.html", context)
 
 
+@login_required
 def receive_item(request, pk):
     queryset = Stock.objects.get(id=pk)
     form = ReceiveItemForm(request.POST or None, instance=queryset)
@@ -139,6 +147,7 @@ def receive_item(request, pk):
     return render(request, "add_items.html", context)
 
 
+@login_required
 def reorder_level(request, pk):
     queryset = Stock.objects.get(id=pk)
     form = ReorderLevelForm(request.POST or None, instance=queryset)
