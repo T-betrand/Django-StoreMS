@@ -37,6 +37,7 @@ class StockCreateForm(forms.ModelForm):
 
 class StockSearchForm(forms.ModelForm):
     export_to_CSV = forms.BooleanField(required=False)
+
     class Meta:
         model = Stock
         fields = ['category', 'item_name']
@@ -46,3 +47,15 @@ class StockUpdateForm(forms.ModelForm):
     class Meta:
         model = Stock
         fields = ['category', 'item_name', 'quantity']
+
+
+class IssueItemForm(forms.ModelForm):
+    class Meta:
+        model = Stock
+        fields = ['issued_quantity', 'issued_to']
+
+
+class ReceiveItemForm(forms.ModelForm):
+    class Meta:
+        model = Stock
+        fields = ['receive_quantity'] #, 'receive_by'
