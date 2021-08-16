@@ -62,40 +62,27 @@
     <div class="jumbotron">
         <div class="header">{{header}}</div>
 
-        <form method="POST" action="">{% csrf_token %}
-            {{form|crispy}}
-            <input type="submit" value="Search"/>
-        </form>
+        <a href="#issue"><div class="btn btn-danger">ISSUE THIS ITEM</div></a>
+        <a href="#receive"><div class="btn btn-primary">RECEIVE THIS ITEM</div></a>
         <br>
-
+        <br>
         <div class="display-table">
             <table class="table">
                 <thead>
                 <tr>
-                    <th>COUNT</th>
-                    <th>ID</th>
-                    <th>CATEGORY</th>
                     <th>ITEM NAME</th>
                     <th>QUANTITY IN STORE</th>
-                    <th>TIME STAMP</th>
                     <th>LAST UPDATED</th>
-                    <th>DELETE</th>
+                    <th>REORDER LEVEL</th>
                 </tr>
                 </thead>
-                {% for instance in queryset %}
                 <tr>
-                    <td>{{ forloop.counter }}</td>
-                    <td>{{ instance.id }}</td>
-                    <td>{{ instance.category }}</td>
-                    <td><a href="{% url 'update-items' instance.id %}">{{ instance.item_name }}</a></td>
-                    <td><a href="{% url 'stock-detail' instance.id %}">{{ instance.quantity }}</td>
-                    <td>{{ instance.timestamp }}</td>
-                    <td>{{ instance.last_updated }}</td>
-                    <td><a href="{% url 'delete-items' instance.id %}"><img height="25"
-                                                                            src="{% static '/img/delete-icon-png-19.jpg' %}"
-                                                                            alt="Delete"></a></td>
+                    <td>{{ queryset.item_name }}</td>
+                    <td>{{ queryset.quantity }}</td>
+                    <td>{{ queryset.last_updated }}</td>
+                    <td>{{ queryset.reorder_level }}</td>
+
                 </tr>
-                {% endfor %}
             </table>
 
         </div>
