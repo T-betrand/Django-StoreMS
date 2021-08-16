@@ -13,4 +13,5 @@ urlpatterns = [
     path('receive_items/<str:pk>/', views.receive_item, name='receive-items'),
     path('issued_items/<str:pk>/', views.issue_items, name='issued-items'),
     path('reorder_level/<str:pk>/', views.reorder_level, name='reorder-level'),
+    path('list_history/', views.list_history, name='list-history'),
 ]
