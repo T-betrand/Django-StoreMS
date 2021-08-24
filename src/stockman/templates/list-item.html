@@ -34,6 +34,13 @@
         }
       }
 
+      .mybutton {
+        width : 100%;
+        background-color: #337ab7;
+      }
+
+
+
 
 
 
@@ -64,54 +71,76 @@
     <div class="jumbotron">
         <div class="header">{{header}}</div>
 
-        <form method="POST" action="">{% csrf_token %}
-            {{form|crispy}}
-            <input type="submit" value="Search"/>
-        </form>
-        <br>
+        <div class="row">
+            <div class="col-sm-2">
+                <form method="POST" action="">{% csrf_token %}
+                    {{form|crispy}}
+                    <input type="submit" class="btn btn-primary mybutton" value="Search"/>
+                </form>
 
-        <div class="display-table">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>COUNT</th>
-                    <th>ID</th>
-                    <th>CATEGORY</th>
-                    <th>ITEM NAME</th>
-                    <th>QUANTITY IN STORE</th>
-                    <th>REORDER LEVEL</th>
-                    <th>TIME STAMP</th>
-                    <th>LAST UPDATED</th>
-                    <th>DELETE</th>
-                </tr>
-                </thead>
-                {% for instance in queryset %}
-                <tr>
+                <br>
+                <br>
 
-                    <td>{{ forloop.counter }}</td>
-                    <td>{{ instance.id }}</td>
-                    <td>{{ instance.category }}</td>
-                    <td><a href="{% url 'update-items' instance.id %}">{{ instance.item_name }}</a></td>
-                    <td>
-                        {% if instance.quantity <= instance.reorder_level %}
-                        <div style="background-color: orange;">
-                            <a href="{% url 'stock-detail' instance.id %}">{{ instance.quantity }}</a>
-                        </div>
-                        {% else %}
-                        <a href="{% url 'stock-detail' instance.id %}">{{ instance.quantity }}</a>
-                        {% endif %}
-                    </td>
-                    <td><a href="{% url 'reorder-level' instance.id %}">{{ instance.reorder_level }}</a></td>
-                    <td>{{ instance.timestamp }}</td>
-                    <td>{{ instance.last_updated }}</td>
-                    <td><a href="{% url 'delete-items' instance.id %}"><img height="25"
-                                                                            src="{% static '/img/delete-icon-png-19.jpg' %}"
-                                                                            alt="Delete"></a></td>
-                </tr>
-                {% endfor %}
-            </table>
+                <a href="/add_items">
+                    <div class="btn btn-primary mybutton">Add Items</div>
+                </a>
 
-        </div>
+                <br>
+                <br>
+
+                <a href="/list_history">
+                    <div class="btn btn-primary mybutton">List History</div>
+                </a>
+
+                <br>
+
+            </div>
+            <br>
+            <div class="col-sm-10">
+                <div class="display-table">
+                    <table class="table">
+                        <thead>
+                        <tr>
+<!--                            <th>COUNT</th>-->
+<!--                            <th>ID</th>-->
+                            <th>CATEGORY</th>
+                            <th>ITEM NAME</th>
+                            <th>QUANTITY IN STORE</th>
+                            <th>REORDER LEVEL</th>
+<!--                            <th>TIME STAMP</th>-->
+                            <th>LAST UPDATED</th>
+                            <th>DELETE</th>
+                        </tr>
+                        </thead>
+                        {% for instance in queryset %}
+                        <tr>
+
+<!--                            <td>{{ forloop.counter }}</td>-->
+<!--                            <td>{{ instance.id }}</td>-->
+                            <td>{{ instance.category }}</td>
+                            <td><a href="{% url 'update-items' instance.id %}">{{ instance.item_name }}</a></td>
+                            <td>
+                                {% if instance.quantity <= instance.reorder_level %}
+                                <div style="background-color: orange;">
+                                    <a href="{% url 'stock-detail' instance.id %}">{{ instance.quantity }}</a>
+                                </div>
+                                {% else %}
+                                <a href="{% url 'stock-detail' instance.id %}">{{ instance.quantity }}</a>
+                                {% endif %}
+                            </td>
+                            <td><a href="{% url 'reorder-level' instance.id %}">{{ instance.reorder_level }}</a></td>
+<!--                            <td>{{ instance.timestamp }}</td>-->
+                            <td>{{ instance.last_updated }}</td>
+                            <td><a href="{% url 'delete-items' instance.id %}"><img height="25"
+                                                                                    src="{% static '/img/delete-icon-png-19.jpg' %}"
+                                                                                    alt="Delete"></a></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+
+                </div>
+            </div>
+        </div><!--div to row-->
         <!--      <a class="btn btn-lg btn-primary" href="/docs/4.4/components/navbar/" role="button">View navbar docs &raquo;</a>-->
 
 
@@ -121,6 +150,9 @@
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="/docs/4.4/assets/js/vendor/jquery.slim.min.js"><\/script>')
+
+
+
 
 
 

@@ -13,6 +13,7 @@ background-color : #34eb6b;
     width: 95%;
     margin: auto;
 }
+
 /*Make Alternating colors for the table rows*/
 .table tr:nth-child(odd){
     background: #B8CAE4;
@@ -23,13 +24,13 @@ background-color : #34eb6b;
 }
 
 th {
-    background-color: #337ab7;
+    background-color:  #337ab7;
     color: white;
 }
 
 /*brings the shadow around the table*/
 .display-table {
-    border-bottom-right-radius: 20px;
+  /*  border-bottom-right-radius: 20px; */
     padding-left: 5px;
     padding-right: 5px;
     padding-bottom: 20px;
@@ -54,3 +55,4 @@ th {
     box-shadow: 12px 12px 12px #e61c66;
     text-align: center;
 }
+

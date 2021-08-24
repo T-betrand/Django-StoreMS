@@ -17,7 +17,8 @@ def home(request):
         "title": title,
         "test": form,
     }
-    return render(request, "home.html", context)
+    return redirect('/list_items')
+    #return render(request, "home.html", context)
 
 
 @login_required
