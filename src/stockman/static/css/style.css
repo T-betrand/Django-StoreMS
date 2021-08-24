@@ -1,9 +1,10 @@
 body {
 background-color : #34eb6b;
+background-image: url("../img/Screenshot (18).png");
 }
 
 .container{
-    background-image: url("img/Screenshot (18).png");
+
 }
 
 /*Align the title to the center of the page*/
